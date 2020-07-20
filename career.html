@@ -15,7 +15,8 @@
 */
 @font-face{font-family:'eightbitdragon';src:url('lib/EightBitDragon-anqx.ttf');}
 .nes-btn,.nes-list,.nes-dialog,.nes-container{font:normal normal 16px/18px eightbitdragon;font-family:eightbitdragon,AppleSDGothicNeoBold,HelveticaNeue-Bold,AppleSDGothicNeo-Bold,sans-serif;}
-.nes-dialog{}
+.nes-btn{line-height:14px;}
+.nes-container{margin-top:20px !important;}
 
 
 .nes-container.with-title>.title{background-color:#fffaee;}
@@ -134,15 +135,23 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<header id="header" style="background-color:silver">
+<header id="header">
 	<button class="btnLogo" style="position:absolute;left:3px;top:2px;">아이콘</button>
-	<h1 style="background-color:#0055aa;color:white;">xxxxxxxx</h1>
+	<h1 style="background-color:#0055aa;color:white;">ahndoori career</h1>
 
-학력
-스킬
-로직
-
-
+	<div class="areaSkill">
+    학력
+    스킬
+    로직
+<button class="nes-btn is-success">java</button>
+<button class="nes-btn is-success">javascript</button>
+<button class="nes-btn is-success">framework</button>
+<button class="nes-btn is-success">server</button>
+<button class="nes-btn is-success">design</button>
+<button class="nes-btn is-success">보험</button>
+<button class="nes-btn is-success">game</button>
+<button class="nes-btn is-success">출금이체동의</button>
+  </div>
 
 	<button class="btnMenu" style="position:absolute;right:3px;top:2px;">메뉴</button>
 	<div id="menu" class="allmenu_new main" style="z-index:500;display:none;background-color:rgba(0,0,0,0.6);position:fixed;left:0;top:0;width:100%;height:832px;">
@@ -170,17 +179,6 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 </header>
 <div id="container"><div id="wrapper"><div id="content">
 
-	<div class="areaSkill">
-<button class="nes-btn is-success">java</button>
-<button class="nes-btn is-success">javascript</button>
-<button class="nes-btn is-success">framework</button>
-<button class="nes-btn is-success">server</button>
-<button class="nes-btn is-success">design</button>
-<button class="nes-btn is-success">보험</button>
-<button class="nes-btn is-success">game</button>
-<button class="nes-btn is-success">출금이체동의</button>
-
-  </div>
 <!--
 <dialog class="nes-dialog is-rounded" id="dialog-rounded">
   <form method="dialog">
@@ -213,7 +211,7 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 
 
 
-<div class="nes-container with-title is-rounded is-centered">
+<div class="nes-container with-title is-rounded"><!-- is-centered-->
   <p class="title">**전자 GTMS 물류시스템</p>
   <p>2012.08~2012.10<br/>
   si, java, javascript, devon, oracle, jda api</p>
