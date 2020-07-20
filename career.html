@@ -3,9 +3,11 @@
 <head>
 <!--<meta name="viewport" content="width=device-width,initial-scale=1.0"/>-->
 <meta name="viewport" content="width=480,user-scalable=no"/><!---->
+<link rel="stylesheet" href="lib/nes.min.css"/>
 <link rel="stylesheet" href="career/default.css"/>
 <style type="text/css">
-
+@font-face{font-family:'gamegirl';src:url('lib/GamegirlClassic-9MVj.ttf');}
+.nes-btn,.nes-list,.nes-dialog{font:normal bold 20px/30px gamegirl;font-family:gamegirl,HelveticaNeue-Light,AppleSDGothicNeo-Light,sans-serif;}
 </style>
 <script type="text/javascript" src="lib/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="career/languages.js"></script>
@@ -310,8 +312,31 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 </header>
 <div id="container"><div id="wrapper"><div id="content">
 
-	<div class="areaList"></div>
+	<div class="areaSkill">
+<button class="nes-btn is-success">java</button>
+<button class="nes-btn is-success">javascript</button>
+<button class="nes-btn is-success">framework</button>
+<button class="nes-btn is-success">server</button>
+<button class="nes-btn is-success">design</button>
+<button class="nes-btn is-success">insurance</button>
+<button class="nes-btn is-success">game</button>
+<button class="nes-btn is-success">출금이체동의</button>
 
+  </div>
+
+  <dialog class="nes-dialog is-rounded" id="dialog-rounded">
+    <form method="dialog">
+      <p class="title">Rounded dialog</p>
+      <p>Alert: this is a dialog.</p>
+      <menu class="dialog-menu">
+        <button class="nes-btn">Cancel</button>
+        <button class="nes-btn is-primary">Confirm</button>
+      </menu>
+    </form>
+  </dialog>
+  <button class="nes-btn is-warning" onclick="document.getElementById('dialog-rounded').showModal();">TEST</button>
+
+<ul class="areaCareer nes-list is-circle"><!--is-disc is-circle-->
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
@@ -326,6 +351,7 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
+</ul>
 
 </div></div></div>
 <div id="footer">
