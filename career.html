@@ -6,8 +6,16 @@
 <link rel="stylesheet" href="lib/nes.min.css"/>
 <link rel="stylesheet" href="career/default.css"/>
 <style type="text/css">
+/*
 @font-face{font-family:'gamegirl';src:url('lib/GamegirlClassic-9MVj.ttf');}
-.nes-btn,.nes-list,.nes-dialog{font:normal bold 20px/30px gamegirl;font-family:gamegirl,HelveticaNeue-Light,AppleSDGothicNeo-Light,sans-serif;}
+@font-face{font-family:'silkscreen';src:url('lib/slkscr.ttf');}
+@font-face{font-family:'dunggeunmo';src:url('lib/DungGeunMo.ttf');}
+@font-face{font-family:'goblinappears';src:url('lib/AGoblinAppears-o2aV.ttf');}
+@font-face{font-family:'advancedpixel';src:url('lib/AdvancedPixel7-2L9W.ttf');}
+*/
+@font-face{font-family:'eightbitdragon';src:url('lib/EightBitDragon-anqx.ttf');}
+.nes-btn,.nes-list,.nes-dialog,.nes-container{font:normal normal 16px/18px eightbitdragon;font-family:eightbitdragon,AppleSDGothicNeoBold,HelveticaNeue-Bold,AppleSDGothicNeo-Bold,sans-serif;}
+.nes-dialog{}
 </style>
 <script type="text/javascript" src="lib/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="career/languages.js"></script>
@@ -266,7 +274,7 @@ $(document).ready(function(){
 <body>
 <header id="header" style="background-color:silver">
 	<button class="btnLogo" style="position:absolute;left:3px;top:2px;">아이콘</button>
-	<h1 style="background-color:#0055aa;color:white;">안두리</h1>
+	<h1 style="background-color:#0055aa;color:white;">xxxxxxxx</h1>
 
 학력
 스킬
@@ -336,12 +344,32 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
   </dialog>
   <button class="nes-btn is-warning" onclick="document.getElementById('dialog-rounded').showModal();">TEST</button>
 
+
+<div id="containers" class="item"><div class="nes-container with-title is-centered">
+  <p class="title">Container.is-centered</p>
+  <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
+</div>
+
+<div class="nes-container is-dark with-title">
+  <p class="title">Container.is-dark</p>
+  <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
+</div>
+
+<div class="nes-container is-rounded">
+  <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
+</div>
+
+<div class="nes-container is-rounded is-dark">
+  <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
+</div></div>
+
+
 <ul class="areaCareer nes-list is-circle"><!--is-disc is-circle-->
-  <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
-  <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
-  <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
-  <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
-  <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
+  <li>**생명 홈페이지 SM 2014.02~2020.08 JAVA JAVASCRIPT MSSQL</li>
+  <li>문화체육관광부 공연예술포털 SI 2013.11~2014.01 JAVA JAVASCRIPT MSSQL</li>
+  <li>**카드 웨딩섹션 SI 2013.09~2013.10 JAVA JAVASCRIPT MSSQL</li>
+  <li>**생명 모바일홈페이지 SI 2013.07~2013.08 JAVA JAVASCRIPT MSSQL</li>
+  <li>대법원 스마트법률정보 SI 2012.10~2013.06 JAVA JAVASCRIPT MSSQL</li>
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
