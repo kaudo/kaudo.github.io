@@ -14,7 +14,7 @@
 @font-face{font-family:'advancedpixel';src:url('lib/AdvancedPixel7-2L9W.ttf');}
 */
 @font-face{font-family:'eightbitdragon';src:url('lib/EightBitDragon-anqx.ttf');}
-.nes-btn,.nes-list,.nes-dialog,.nes-container{font:normal normal 16px/18px eightbitdragon;font-family:eightbitdragon,AppleSDGothicNeoBold,HelveticaNeue-Bold,AppleSDGothicNeo-Bold,sans-serif;}
+.nes-btn,.nes-list,.nes-dialog,.nes-container,.nes-badge{font:normal normal 16px/18px eightbitdragon;font-family:eightbitdragon,AppleSDGothicNeoBold,HelveticaNeue-Bold,AppleSDGothicNeo-Bold,sans-serif;}
 .nes-btn{line-height:14px;}
 .nes-container{margin-top:20px !important;}
 
@@ -52,6 +52,7 @@ var kakaoCustomOverlay;
 
 $(window).resize(resizeWindow=function(){
     $('#content').css({height:$('html').height()-$('#header').height()-$('#footer').height(),visibility:'visible'});
+    $('#dialog').css({height:$('html').height()-$('#header').height()-$('#footer').height(),visibility:'visible'});
 });
 
 $(document).ready(function(){
@@ -134,6 +135,16 @@ $(document).ready(function(){
 		return false;
 	});
 
+  $('#dialog .btnClose').unbind('click').click(function(){
+    $('#dialog').hide();
+    return false;
+  });
+
+  $('#header .btnSkill').unbind('click').click(function(){
+    $('#dialog').show();
+    return false;
+  });
+
 });
 </script>
 </head>
@@ -146,14 +157,14 @@ $(document).ready(function(){
     학력
     스킬
     로직
-<button class="nes-btn is-success">java</button>
-<button class="nes-btn is-success">javascript</button>
-<button class="nes-btn is-success">framework</button>
-<button class="nes-btn is-success">server</button>
-<button class="nes-btn is-success">design</button>
-<button class="nes-btn is-success">보험</button>
-<button class="nes-btn is-success">game</button>
-<button class="nes-btn is-success">출금이체동의</button>
+<button class="nes-btn is-success btnSkill">java</button>
+<button class="nes-btn is-success btnSkill">javascript</button>
+<button class="nes-btn is-success btnSkill">framework</button>
+<button class="nes-btn is-success btnSkill">server</button>
+<button class="nes-btn is-success btnSkill">design</button>
+<button class="nes-btn is-success btnSkill">보험</button>
+<button class="nes-btn is-success btnSkill">game</button>
+<button class="nes-btn is-success btnSkill">출금이체동의</button>
   </div>
 
 	<button class="btnMenu" style="position:absolute;right:3px;top:2px;">메뉴</button>
@@ -178,9 +189,27 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 	test
 	</div>
 
-
 </header>
 <div id="container"><div id="wrapper"><div id="content">
+
+
+<div id="dialog" style="position:absolute;background-color:rgb(0,0,0,0.6);z-index:900;width:100%;left:0;padding:10px;padding-top:0px;">
+  <div class="nes-container with-title is-rounded" style="background-color:white;height:100%;"><!-- is-centered-->
+    <a href="#" class="btnClose" style="position:absolute;margin-top:-20px;margin-left:-2px;background-color:#f7d51d;padding:3px 5px 3px 15px;color:black;">javascript</a>
+    <i class="nes-icon is-medium star btnClose" style="position:absolute;margin-top:-40px;margin-left:-38px;"></i>
+    <p style="margin-top:15px;height:100%;overflow:auto;font-size:15px;">
+      자바스크립트는 제가 가장 좋아하고 즐기는 언어입니다.<br/>
+      오랫동안 소프트웨어 개발자 일을 하면서,<br/>
+      보안에 관련없는, 서버에 부하가 가는, 사용자에게 좀더 낳은 경험을 주는 여러가지 상황들을,<br/>
+      자바스크립트로 동적 화면을 만드는것을 즐겼습니다.<br/>
+      요즘(2020년)에는 퍼블리셔가 스크립트를 작성하는 경우가 많은데,<br/>
+      퍼블리셔에게 제공받은 무료라이브러리나 오랫동안 가지고 다닌 스크립트를 아무런 스트레스 없이 고쳐서 사용할 수 있습니다.<br/>
+      처음 일을 시작할 당시부터 드래깅, jquery, jqgrid, 비동기(ajax), jqueryui등을 사용하고 자바스크립트에 코딩하는 시간을 매우 많이 할애했습니다.<br/>
+      요즘 유행하는 vue.js, node,js등도 관심이 있고 짧은 시간안에 능숙한 코딩을 할 수 있다고 자신합니다.<br/>
+    </p>
+  </div>
+</div>
+
 
 <!--
 <dialog class="nes-dialog is-rounded" id="dialog-rounded">
@@ -237,20 +266,9 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
 </ul>
 
-
-
-<div id="dialog" class="layer"><div class="dim"></div><span>
-  <div class="nes-container with-title is-rounded"><!-- is-centered-->
-    <p class="title">**전자 GTMS 물류시스템</p>
-    <p>2012.08~2012.10<br/>
-    si, java, javascript, devon, oracle, jda api</p>
-  </div>
-</div></span></div>
-
-
 </div></div></div>
 <div id="footer">
-	<div style="display:table-cell;padding:8px 8px;vertical-align:middle;font:normal bold 14px/14px malgun;letter-spacing:-0.4px;text-align:right;">
+	<div style="display:table-cell;font:normal bold 14px/12px malgun;letter-spacing:-0.4px;text-align:right;">
     <font class="txtTotalCount">AHNDOORI CAREER SITE WAS LAST UPDATED IN AUGUST 2020.</font></div>
 </div>
 
