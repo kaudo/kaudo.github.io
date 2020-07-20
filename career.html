@@ -16,6 +16,9 @@
 @font-face{font-family:'eightbitdragon';src:url('lib/EightBitDragon-anqx.ttf');}
 .nes-btn,.nes-list,.nes-dialog,.nes-container{font:normal normal 16px/18px eightbitdragon;font-family:eightbitdragon,AppleSDGothicNeoBold,HelveticaNeue-Bold,AppleSDGothicNeo-Bold,sans-serif;}
 .nes-dialog{}
+
+
+.nes-container.with-title>.title{background-color:#fffaee;}
 </style>
 <script type="text/javascript" src="lib/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="career/languages.js"></script>
@@ -38,55 +41,16 @@ var clickBtnBack=function(){
 };
 
 
-var dataFavorite=[];
-var dataHistory=[];
-
-var gData;
-var gList;
-var gResultType='json';
-var gCountPerPage=12;
-var gCurrentPage=0;
-var gTotalCount;
-var gKeyword='';
-
-var gCity='여수시';
-var gKeyword='어린';
-var gChildOver;
-var gChildLess;
-var gRoomOver;
-var gRoomLess;
-
 
 var kakaoMap;
 var kakaoMarker;
 var kakaoCustomOverlay;
 
-var toast=function(strMessage){
-    //if(typeof(call)=='undefined') alert(strMessage);
-    //else call.toast(strMessage);
-    $('#loading').hide();
-    $('#toast div').html(strMessage);
-    $('#toast').show();
-    setTimeout(function(){
-        $('#toast').fadeOut(500,'swing'/*swing,linear*/, function(){console.log('toast complete');});
-    },500);
-};
-
 $(window).resize(resizeWindow=function(){
     $('#content').css({height:$('html').height()-$('#header').height()-$('#footer').height(),visibility:'visible'});
-    //$('#menu').css({height:$('html').height()});
 });
 
 $(document).ready(function(){
-
-    $('.checkFavorite').unbind('click').click(checkFavorite=function(){
-        $('.btnFavorite').removeClass('on');
-        if(typeof(dataFavorite)!='object') return false;
-        $.each(dataFavorite,function(idx,obj){
-            $('.roadAddr:contains("'+obj.roadAddr+'")').parent().find('.btnFavorite').addClass('on');//.css('background-position','-35px 0px');
-        });
-        return false;
-    });
 
     $('.setBtnCopy').unbind('click').click(setBtnCopy=function(){
         $('.btnCopy').unbind('click').click(function(e){
@@ -100,27 +64,6 @@ $(document).ready(function(){
         });
         return false;
     });
-
-    $('.setBtnFavorite').unbind('click').click(setBtnFavorite=function(){
-        $('.btnFavorite').unbind('click').click(function(e){
-            if($(this).hasClass('on')){
-                var objectDelete=$(this).parent();
-                $.each(dataFavorite,function(idx,obj){
-                    if(objectDelete.find('.roadAddr').text()==obj.roadAddr){
-                        dataFavorite.splice(idx,1);
-                        return false;
-                    }
-                });
-            }else{
-                dataFavorite.push($(this).parent().data('data'));
-            }
-            checkFavorite();
-            if(typeof(call)!='undefined') call.putSharedPreferences('dataFavorite',JSON.stringify(dataFavorite));
-            return false;
-        });
-        return false;
-    });
-
 
     $('.setBtnMap').unbind('click').click(setBtnMap=function(){
         $('.btnMap').unbind('click').click(function(e){
@@ -169,50 +112,6 @@ $(document).ready(function(){
 		//if($('#content').scrollTop()+$('#content').height()>=$('#content').prop('scrollHeight')-10) searchZipcodeRoad();
     });
 
-/*
-    $('.btnMenu').unbind('click').click(function(){
-        $('.areaFavorite').html('');
-        for(var i=0;i<dataFavorite.length;i++){
-            $('.areaFavorite').append('<div class="item">'+
-                '<button class="btnFavorite on" style="float:right;">즐겨찾기</button>'+
-                '<button class="btnMap" style="float:right;">지도</button>'+
-                '<font class="zipNo"><button class="btnCopy"></button>'+dataFavorite[i].zipNo+'</font><br/>'+
-                '<font class="roadAddr"><button class="btnCopy"></button>'+dataFavorite[i].roadAddr+'</font><br/>'+
-                '<font class="jibunAddr"><button class="btnCopy"></button>'+dataFavorite[i].jibunAddr+'</font><br/>'+
-                '<font class="engAddr"><button class="btnCopy"></button>'+dataFavorite[i].engAddr+'</font></div>');
-            $('.areaFavorite .item:last').data('data',dataFavorite[i]);
-        }
-        //$('.txtTotalCount').html(gData.totalCount);
-        //$('.txtCurrentCount').html($('.item').length);
-        setBtnCopy();
-        setBtnFavorite();
-        setBtnMap();
-        $('#menu').show();
-		$('#menu .inner').css('left','100%').animate({left:'0'},400,function(){});
-		return false;
-    });
-
-    $('.btnCloseMenu').unbind('click').click(function(){
-        $('#menu .inner').animate({left:'100%'},400,function(){
-			$('#menu').hide();
-			$('html,body').css({'height':'','overflow':''});
-			$('#header .btnOpenMenu').focus();
-		});
-		return false;
-    });
-
-    $('.btnCloseMap').unbind('click').click(function(){
-        $('#kakaoMap').html('');
-        $('#map').hide();
-        return false;
-    });
-
-    $('.btnLogo, #info').unbind('click').click(function(){
-        $('#info').toggle();
-        return false;
-    });
-*/
-
     $('#info button').unbind('click');
     resizeWindow();
     if(typeof(call)!='undefined'){
@@ -230,43 +129,6 @@ $(document).ready(function(){
 		$('.areaMap').hide();
 		return false;
 	});
-
-
-	for(var i=0;i<100;i++){
-		$('select[name="selectChildOver"]').append('<option value="'+i+'">'+i+'명</option>');
-	}
-	for(var i=0;i<100;i++){
-		$('select[name="selectChildLess"]').append('<option value="'+i+'">'+i+'명</option>');
-	}
-	for(var i=0;i<100;i++){
-		$('select[name="selectRoomOver"]').append('<option value="'+i+'">'+i+'명</option>');
-	}
-	for(var i=0;i<100;i++){
-		$('select[name="selectRoomLess"]').append('<option value="'+i+'">'+i+'명</option>');
-	}
-
-	$('.btnCity').unbind('click').click(clickBtnSearch=function(){
-		$('.areaList').html('');
-		$.each($.data,function(idx,item){
-			if(gCity && item.city!=gCity) return true;
-			if(gKeyword && item.name.indexOf(gKeyword)<0 && item.address.indexOf(gKeyword)<0
-				&& item.phone.indexOf(gKeyword)<0 && item.fax.indexOf(gKeyword)<0) return true;
-			if(gChildOver && parseInt(item.child)<gChildOver) return true;
-			if(gChildLess && parseInt(item.child)>gChildLess) return true;
-			if(gRoomOver && parseInt(item.room)<gRoomOver) return true;
-			if(gRoomLess && parseInt(item.room)>gRoomLess) return true;
-			$('.areaList').append(''+
-			item.name+', '+
-			item.city+', '+
-			item.phone+', '+
-			item.fax+', '+
-			item.address+', '+
-			'<br/>');
-
-		});
-	});
-
-    clickBtnSearch();
 
 });
 </script>
@@ -301,20 +163,8 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 
 	<input type="text" name="copy" style="position:absolute;width:1px;height:1px;border:0;"/>
 	<div class="areaSearch">
-		<div class="txtSearch" style="text-align:right;">정원</div> <select name="selectChildOver"></select><div class="txtSearch" style="text-align:left;">이상</div><select name="selectChildLess"></select><div class="txtSearch" style="text-align:left;">이하</div>
-		<input name="keyword" maxlength="50" style="position:absolute;right:26px;width:140px;height:23px;border:1px gray solid;padding:0 3px;background-color:white;font:normal bold 16px/18px message-box;"/><button class="btnSearch" style="position:absolute;right:2px;">검색</button>
-		<br/>
-		<div class="txtSearch" style="text-align:right;">교실수</div> <select name="selectRoomOver"></select><div class="txtSearch" style="text-align:left;">이상</div><select name="selectRoomLess"></select><div class="txtSearch" style="text-align:left;">이하</div><br/>
+	test
 	</div>
-
-
-
-
-
-
-
-
-
 
 
 </header>
@@ -326,26 +176,27 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 <button class="nes-btn is-success">framework</button>
 <button class="nes-btn is-success">server</button>
 <button class="nes-btn is-success">design</button>
-<button class="nes-btn is-success">insurance</button>
+<button class="nes-btn is-success">보험</button>
 <button class="nes-btn is-success">game</button>
 <button class="nes-btn is-success">출금이체동의</button>
 
   </div>
+<!--
+<dialog class="nes-dialog is-rounded" id="dialog-rounded">
+  <form method="dialog">
+    <p class="title">Rounded dialog</p>
+    <p>Alert: this is a dialog.</p>
+    <menu class="dialog-menu">
+      <button class="nes-btn">Cancel</button>
+      <button class="nes-btn is-primary">Confirm</button>
+    </menu>
+  </form>
+</dialog>
+<button class="nes-btn is-warning" onclick="document.getElementById('dialog-rounded').showModal();">TEST</button>
+-->
 
-  <dialog class="nes-dialog is-rounded" id="dialog-rounded">
-    <form method="dialog">
-      <p class="title">Rounded dialog</p>
-      <p>Alert: this is a dialog.</p>
-      <menu class="dialog-menu">
-        <button class="nes-btn">Cancel</button>
-        <button class="nes-btn is-primary">Confirm</button>
-      </menu>
-    </form>
-  </dialog>
-  <button class="nes-btn is-warning" onclick="document.getElementById('dialog-rounded').showModal();">TEST</button>
 
-
-<div id="containers" class="item"><div class="nes-container with-title is-centered">
+  <div class="nes-container with-title is-centered">
   <p class="title">Container.is-centered</p>
   <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
 </div>
@@ -355,14 +206,18 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
   <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
 </div>
 
-<div class="nes-container is-rounded">
+<div class="nes-container is-rounded is-dark">
+  <p class="title">Container.is-centered</p>
   <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
 </div>
 
-<div class="nes-container is-rounded is-dark">
-  <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
-</div></div>
 
+
+<div class="nes-container with-title is-rounded is-centered">
+  <p class="title">**전자 GTMS 물류시스템</p>
+  <p>2012.08~2012.10<br/>
+  si, java, javascript, devon, oracle, jda api</p>
+</div>
 
 <ul class="areaCareer nes-list is-circle"><!--is-disc is-circle-->
   <li>**생명 홈페이지 SM 2014.02~2020.08 JAVA JAVASCRIPT MSSQL</li>
