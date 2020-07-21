@@ -45,6 +45,8 @@ var clickBtnBack=function(){
 $(window).resize(resizeWindow=function(){
     $('#content').css({height:$('html').height()-$('#header').height()-$('#footer').height(),visibility:'visible'});
     $('#dialog').css({height:$('html').height()-$('#header').height()-$('#footer').height(),visibility:'visible'});
+    $('#header').css({height:$('.head').height()+$('.areaSkill').height()+10});
+    $('#wrapper').css({paddingTop:$('.head').height()+$('.areaSkill').height()+10});
 });
 
 $(document).ready(function(){
@@ -104,7 +106,7 @@ $(document).ready(function(){
   <input type="text" name="copy" style="position:absolute;width:1px;height:1px;border:0;visibility:hidden;"/>
 
 	<!--<button class="btnLogo" style="position:absolute;left:3px;top:2px;">아이콘</button>-->
-	<div class="nes-font" style="font-size:24px;background-color:#f7d51d;color:black;line-height:40px;padding:0 0 0 10px;margin-bottom:4px;border-bottom:1px #555 solid;">AHNDOORI CAREER</div>
+	<div class="head nes-font" style="font-size:24px;background-color:#f7d51d;color:black;line-height:40px;padding:0 0 0 10px;margin-bottom:4px;border-bottom:1px #555 solid;">AHNDOORI CAREER</div>
 <!--
 	<button class="btnMenu" style="position:absolute;right:3px;top:2px;">메뉴</button>
 	<div id="menu" class="allmenu_new main" style="z-index:500;display:none;background-color:rgba(0,0,0,0.6);position:fixed;left:0;top:0;width:100%;height:832px;">
