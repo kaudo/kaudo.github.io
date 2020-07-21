@@ -14,7 +14,7 @@
 @font-face{font-family:'advancedpixel';src:url('lib/AdvancedPixel7-2L9W.ttf');}
 */
 @font-face{font-family:'eightbitdragon';src:url('lib/EightBitDragon-anqx.ttf');}
-.nes-btn,.nes-list,.nes-dialog,.nes-container,.nes-badge{font:normal normal 16px/18px eightbitdragon;font-family:eightbitdragon,AppleSDGothicNeoBold,HelveticaNeue-Bold,AppleSDGothicNeo-Bold,sans-serif;}
+.nes-font,.nes-btn,.nes-list,.nes-dialog,.nes-container,.nes-badge{font:normal normal 16px/18px eightbitdragon;font-family:eightbitdragon,AppleSDGothicNeoBold,HelveticaNeue-Bold,AppleSDGothicNeo-Bold,sans-serif;}
 .nes-btn{line-height:14px;}
 .nes-container{margin-top:20px !important;}
 
@@ -23,6 +23,8 @@
 .nes-container.is-rounded.with-title>.title{margin-top:-1.9rem;}
 
 .nes-container.is-rounded{border-image-repeat:stretch !important;}
+
+.btnSkill{margin-bottom:7px;}
 </style>
 <script type="text/javascript" src="lib/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="career/languages.js"></script>
@@ -142,17 +144,19 @@ $(document).ready(function(){
   });
 
   $('#header .btnSkill').unbind('click').click(function(){
+    $('#loading').show();
     $.ajax({
   		url:(!location.host ? urlPrefix : '')+'career/skill_'+$(this).attr('tag')+'.html',
   		type:'get',
   		timeout:10000,
-  		error:function(){},
+  		error:function(){$('#loading').hide();},
   		success:function(data){
         $aryData=data.replace(/\n/gi,'<br/>').split('<br/>');
         $('#dialog a').html($aryData[0]);
         $aryData.splice(0,2);
   			$('#dialog p').html($aryData.join('<br/>'));
         $('#dialog').show();
+        $('#loading').hide();
   		}
   	});
     return false;
@@ -163,23 +167,11 @@ $(document).ready(function(){
 </head>
 <body>
 <header id="header">
-	<button class="btnLogo" style="position:absolute;left:3px;top:2px;">아이콘</button>
-	<h1 style="background-color:#0055aa;color:white;">ahndoori career</h1>
+  <input type="text" name="copy" style="position:absolute;width:1px;height:1px;border:0;visibility:hidden;"/>
 
-	<div class="areaSkill">
-    학력
-    스킬
-    로직
-<button class="nes-btn is-success btnSkill" tag="java">java</button>
-<button class="nes-btn is-success btnSkill" tag="javascript">javascript</button>
-<button class="nes-btn is-success btnSkill" tag="framework">framework</button>
-<button class="nes-btn is-success btnSkill" tag="server">server</button>
-<button class="nes-btn is-success btnSkill" tag="design">design/pub</button>
-<button class="nes-btn is-success btnSkill" tag="insurance">보험</button>
-<button class="nes-btn is-success btnSkill" tag="game">game</button>
-<button class="nes-btn is-success btnSkill" tag="der">출금이체동의</button>
-  </div>
-
+	<!--<button class="btnLogo" style="position:absolute;left:3px;top:2px;">아이콘</button>-->
+	<h1 class="nes-font" style="background-color:#0055aa;color:white;padding-top:10px;height:32px;margin-bottom:3px;">AHNDOORI CAREER</h1>
+<!--
 	<button class="btnMenu" style="position:absolute;right:3px;top:2px;">메뉴</button>
 	<div id="menu" class="allmenu_new main" style="z-index:500;display:none;background-color:rgba(0,0,0,0.6);position:fixed;left:0;top:0;width:100%;height:832px;">
 		<div class="inner" style="position:relative;left:100%;height:100%;box-sizing:border-box;margin-left:100px;">
@@ -191,23 +183,30 @@ $(document).ready(function(){
 			<div class="btn_close_menu main"><a href="#none" style="top: 300px;">닫기</a></div>
 		</div>
 	</div>
+-->
+	<div class="areaSkill">
+<button class="nes-btn is-success btnSkill" tag="java">java</button>
+<button class="nes-btn is-success btnSkill" tag="javascript">javascript</button>
+<button class="nes-btn is-success btnSkill" tag="framework">framework</button>
+<button class="nes-btn is-success btnSkill" tag="server">server</button>
+<button class="nes-btn is-success btnSkill" tag="design">design/pub</button>
+<button class="nes-btn is-success btnSkill" tag="insurance">보험</button>
+<button class="nes-btn is-success btnSkill" tag="game">game</button>
+<button class="nes-btn is-success btnSkill" tag="der">출금이체동의</button>
+  </div>
 
 <style>
 select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 .txtSearch{display:inline-block;width:50px;line-height:25px;margin:0 5px;}
 </style>
 
-	<input type="text" name="copy" style="position:absolute;width:1px;height:1px;border:0;"/>
-	<div class="areaSearch">
-	test
-	</div>
 
 </header>
 <div id="container"><div id="wrapper"><div id="content">
 
 
-<div id="dialog" style="position:absolute;background-color:rgb(0,0,0,0.6);z-index:900;width:100%;left:0;padding:10px;padding-top:0px;">
-  <div class="nes-container with-title is-rounded" style="background-color:white;max-height:100%;"><!-- is-centered-->
+<div id="dialog" style="">
+  <div class="nes-container with-title is-rounded" style=""><!-- is-centered-->
     <a href="#" class="btnClose" style="position:absolute;margin-top:-20px;margin-left:-2px;background-color:#f7d51d;padding:3px 5px 3px 15px;color:black;">javascript</a>
     <i class="nes-icon is-medium star btnClose" style="position:absolute;margin-top:-40px;margin-left:-38px;"></i>
     <p style="margin-top:15px;height:100%;overflow:auto;font-size:15px;font:normal normal 18px/20px auto;">
@@ -235,12 +234,63 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 </div>
 
 <div class="nes-container with-title is-rounded"><!-- is-centered-->
-  <p class="title">**전자 GTMS 물류시스템</p>
-  <p>2012.08~2012.10<br/>
+  <p class="title">방송통신대학 학사관리 시스템</p>
+  <p>2011.04~2011.11<br/>
   si, java, javascript, devon, oracle, jda api</p>
 </div>
 
-<ul class="areaCareer nes-list is-circle"><!--is-disc is-circle-->
+<div class="nes-container with-title is-rounded"><!-- is-centered-->
+  <p class="title">여수엑스포 지정사업자 관리 시스템</p>
+  <p>2011.04~2011.11<br/>
+  si, java, javascript, devon, oracle, jda api</p>
+</div>
+
+<div class="nes-container with-title is-rounded"><!-- is-centered-->
+  <p class="title">**전력 데스크탑 가상화</p>
+  <p>2010.09~2010.11<br/>
+  si, java, javascript, devon, oracle, jda api</p>
+</div>
+
+<div class="nes-container with-title is-rounded"><!-- is-centered-->
+  <p class="title">**모직 쇼핑몰 구축</p>
+  <p>2009.05~2010.06<br/>
+  si, java, javascript, devon, oracle, jda api</p>
+</div>
+
+<div class="nes-container with-title is-rounded"><!-- is-centered-->
+  <p class="title">***엔터테인먼트 게임</p>
+  <p>2008.03~2008.11<br/>
+  si, java, javascript, devon, oracle, jda api</p>
+</div>
+
+<div class="nes-container with-title is-rounded"><!-- is-centered-->
+  <p class="title">**번가 쇼핑몰 기획전</p>
+  <p>2008.02<br/>
+  si, java, javascript, devon, oracle, jda api</p>
+</div>
+
+<div class="nes-container with-title is-rounded"><!-- is-centered-->
+  <p class="title">**엔터테인먼트 음원 사이트</p>
+  <p>2005.05~2007.11<br/>
+  si, java, javascript, devon, oracle, jda api</p>
+</div>
+
+<div class="nes-container with-title is-rounded"><!-- is-centered-->
+  <p class="title">**에이전시</p>
+  <p>2004.09~2004.11<br/>
+  si, java, javascript, devon, oracle, jda api</p>
+</div>
+
+<div class="nes-container with-title is-rounded"><!-- is-centered-->
+  <p class="title">**커뮤니케이션</p>
+  <p>2001.07~2003.11<br/>
+  si, java, javascript, devon, oracle, jda api</p>
+</div>
+
+<br/>
+
+<!--
+<ul class="areaCareer nes-list is-circle" tag="is-disc is-circle">
   <li>**생명 홈페이지 SM 2014.02~2020.08 JAVA JAVASCRIPT MSSQL</li>
   <li>문화체육관광부 공연예술포털 SI 2013.11~2014.01 JAVA JAVASCRIPT MSSQL</li>
   <li>**카드 웨딩섹션 SI 2013.09~2013.10 JAVA JAVASCRIPT MSSQL</li>
@@ -256,11 +306,11 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
   <li>라이나생명 2020.08~2020.08 JAVA JAVASCRIPT MSSQL</li>
 </ul>
+-->
 
 </div></div></div>
 <div id="footer">
-	<div style="display:table-cell;font:normal bold 14px/12px malgun;letter-spacing:-0.4px;text-align:right;">
-    <font class="txtTotalCount">AHNDOORI CAREER SITE WAS LAST UPDATED IN AUGUST 2020.</font></div>
+  <font class="nes-font" style="font-size:12px;height:26px;">AHNDOORI CAREER SITE WAS LAST UPDATED IN AUGUST 2020.</font>
 </div>
 
 <div id="loading"><div><img src="lib/loading.gif" alt="loading"/></div></div>
