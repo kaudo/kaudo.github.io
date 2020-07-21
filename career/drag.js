@@ -29,6 +29,7 @@ $(document).ready(function(){
 		}).on('mouseup touchend',function(){
 			dragObj.removeClass('dragging');
 		});
+
 	});
 
 });
