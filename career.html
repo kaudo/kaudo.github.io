@@ -14,13 +14,12 @@
 */
 @font-face{font-family:'eightbitdragon';src:url('lib/EightBitDragon-anqx.ttf');}
 .nes-font,.nes-btn,.nes-list,.nes-dialog,.nes-container,.nes-badge{font:normal normal 16px/18px eightbitdragon;font-family:eightbitdragon,AppleSDGothicNeoBold,HelveticaNeue-Bold,AppleSDGothicNeo-Bold,sans-serif;}
-.nes-btn{line-height:14px;}
+.nes-btn{font-size:14px;line-height:14px;border:3px #555 solid;border-raidus:5px;background-color:#92cc41;margin-bottom:3px;height:26px;}
 
 .nes-container{margin-top:20px;padding:10px;border:3px #555 solid;border-radius:5px;}
-.nes-container.is-rounded.with-title>.title{display:inline-table;font-size:22px;background-color:#fffaee;border:0px red solid;margin-top:-20px;}
-.nes-container p{font-size:10px;}
+.nes-container.is-rounded.with-title>.title{display:inline-table;font-size:16px;background-color:#fffaee;border:0px red solid;margin-top:-24px;margin-left:-3px;padding:3px;}
+.nes-container p{font-size:12px;}
 
-.btnSkill{font-size:1rem;line-height:0.7rem;margin-bottom:0.8vh;padding-top:0.5vh;}
 </style>
 <script type="text/javascript" src="lib/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="career/languages.js"></script>
@@ -43,73 +42,12 @@ var clickBtnBack=function(){
     pressedBtnBack=new Date().getTime();
 };
 
-
-
-var kakaoMap;
-var kakaoMarker;
-var kakaoCustomOverlay;
-
 $(window).resize(resizeWindow=function(){
     $('#content').css({height:$('html').height()-$('#header').height()-$('#footer').height(),visibility:'visible'});
     $('#dialog').css({height:$('html').height()-$('#header').height()-$('#footer').height(),visibility:'visible'});
 });
 
 $(document).ready(function(){
-
-    $('.setBtnCopy').unbind('click').click(setBtnCopy=function(){
-        $('.btnCopy').unbind('click').click(function(e){
-            var strCopy=$(this).parent().text();
-            $('input[name="copy"]').val(strCopy);
-            $('input[name="copy"]').select();
-            document.execCommand('copy');
-            $('input[name="copy"]').blur();
-            toast('클립보드에 복사되었습니다.');
-            return false;
-        });
-        return false;
-    });
-
-    $('.setBtnMap').unbind('click').click(setBtnMap=function(){
-        $('.btnMap').unbind('click').click(function(e){
-            var dataRoadAddr=$(this).parent().data('data').roadAddr;
-            $('#loading').fadeIn(100).fadeTo("fast",0.8);
-            /*
-            $.ajax({
-                url:'https://www.juso.go.kr/addrlink/addrCoordApiJsonp.do',
-                type:'post',
-                dataType:'jsonp',
-                data:data,
-                error:function(xhr,status,error){ $('#loading').hide();return; },
-                success:function(data){
-                console.log(data.results.juso[0].entX,data.results.juso[0].entY);
-                }
-            }); // $.ajax({
-            */
-            $.ajax({
-                url: 'https://dapi.kakao.com/v2/local/search/address.json?query='+dataRoadAddr,
-                headers:{'Authorization':'KakaoAK 47a843a030bb5754622f3003c4bcb38c'},
-                type:'GET'
-            }).done(function(data){
-                $('#map').show();
-                kakaoMap=new kakao.maps.Map(document.getElementById('kakaoMap'),{center:new kakao.maps.LatLng(data.documents[0].y,data.documents[0].x),level:3,});
-                kakaoMarker=new kakao.maps.Marker({map:kakaoMap,position:kakaoMap.getCenter(),});
-                //var marker=new kakao.maps.Marker({position:kakaoMap.getCenter()}).setMap(map);
-                kakaoCustomOverlay=new kakao.maps.CustomOverlay({
-                    //position:new kakao.maps.LatLng(parseFloat(data.documents[0].y)+0.0005,data.documents[0].x),
-                    position:kakaoMap.getCenter(),
-                    content:'<div style="background-color:#fff;border:1px #333 solid;border-radius: 5px;padding: 2px 6px;margin-top:-65px;"><span class="left"></span><span class="center">'+dataRoadAddr+'</span><span class="right"></span></div>'
-                }).setMap(kakaoMap);
-
-                $('#loading').hide();
-
-            });
-            return false;
-        }); // $('.btnMap').unbind('click').click(function(e){
-        return false;
-    });
-
-
-    $('input[name="keyword"]').bind('keyup',function(e){if(e.keyCode==13)searchZipcodeRoad();});
 
 	$('#content').scroll(function(e){
 		if($('#loading:visible').length) return false;
