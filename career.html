@@ -51,22 +51,34 @@ $(window).resize(resizeWindow=function(){
 $(document).ready(function(){
 
 	$('#content').scroll(function(e){
-		if($('#loading:visible').length) return false;
-		//if($('#content').scrollTop()+$('#content').height()>=$('#content').prop('scrollHeight')-10) searchZipcodeRoad();
-    });
+    if($('#loading:visible').length) return false;
+    //if($('#content').scrollTop()+$('#content').height()>=$('#content').prop('scrollHeight')-10) searchZipcodeRoad();
+  });
 
-    $('#info button').unbind('click');
-    resizeWindow();
-    if(typeof(call)!='undefined'){
-        if(call.getSharedPreferences('dataFavorite') && call.getSharedPreferences('dataFavorite')!='undefined')
-            dataFavorite=JSON.parse(call.getSharedPreferences('dataFavorite'));
-        if(call.getSharedPreferences('dataHistory') && call.getSharedPreferences('dataHistory')!='undefined')
-            $('input[name="keyword"]').val(call.getSharedPreferences('dataHistory'));
-            //$('input[name="keyword"]').val(JSON.parse(call.getSharedPreferences('dataFavorite'))[0].keyword);
-    }
-	//if(!$('input[name="keyword"]').val()) $('input[name="keyword"]').val('강동구 천호대로 지하 1097');
-    //$('.btnSearch:first').click();
-    $('#loading').hide();
+  $('.btnMap').unbind('click').click(function(e){
+    var address=$(this).val();
+    $('#loading').fadeIn(100).fadeTo("fast",0.8);
+    $.ajax({
+        url: 'https://dapi.kakao.com/v2/local/search/address.json?query='+address,
+        headers:{'Authorization':'KakaoAK b653007ba9ca2519f1a6f3bb8b503856'},
+        type:'GET'
+    }).done(function(data){
+        $('#map').show();
+        kakaoMap=new kakao.maps.Map(document.getElementById('kakaoMap'),{center:new kakao.maps.LatLng(data.documents[0].y,data.documents[0].x),level:3,});
+        kakaoMarker=new kakao.maps.Marker({map:kakaoMap,position:kakaoMap.getCenter(),});
+        //var marker=new kakao.maps.Marker({position:kakaoMap.getCenter()}).setMap(map);
+        kakaoCustomOverlay=new kakao.maps.CustomOverlay({
+            //position:new kakao.maps.LatLng(parseFloat(data.documents[0].y)+0.0005,data.documents[0].x),
+            position:kakaoMap.getCenter(),
+            content:'<div style="background-color:#fff;border:1px #333 solid;border-radius: 5px;padding: 2px 6px;margin-top:-65px;"><span class="left"></span><span class="center">'+dataRoadAddr+'</span><span class="right"></span></div>'
+        }).setMap(kakaoMap);
+
+        $('#loading').hide();
+
+    });
+    return false;
+  }); // $('.btnMap').unbind('click').click(function(e){
+
 
 	$('.btnCloseMap').unbind('click').click(function(){
 		$('.areaMap').hide();
@@ -97,7 +109,11 @@ $(document).ready(function(){
     return false;
   });
 
+  $('#info button').unbind('click');
   resizeWindow();
+	//if(!$('input[name="keyword"]').val()) $('input[name="keyword"]').val('강동구 천호대로 지하 1097');
+  //$('.btnSearch:first').click();
+  $('#loading').hide();
 
 });
 </script>
