@@ -59,8 +59,13 @@ $(document).ready(function(){
         headers:{'Authorization':'KakaoAK 88bf5219ab2618c0ab4eba7d524da046'},
         type:'GET'
     }).done(function(data){
+      if(!data || !data.documents || data.documents.length<1 || !data.documents[0].y){
+        alert('존재하지 않는 주소 입니다.');
+        $('#loading').hide();
+        return false;
+      }
       $('#map').show();
-      kakaoMap=new kakao.maps.Map(document.getElementById('kakaoMap'),{center:new kakao.maps.LatLng(data.documents[0].y,data.documents[0].x),level:3,});
+      kakaoMap=new kakao.maps.Map(document.getElementById('kakaoMap'),{center:new kakao.maps.LatLng(data.documents[0].y,data.documents[0].x),level:7,});
       kakaoMarker=new kakao.maps.Marker({map:kakaoMap,position:kakaoMap.getCenter(),});
       //var marker=new kakao.maps.Marker({position:kakaoMap.getCenter()}).setMap(map);
       kakaoCustomOverlay=new kakao.maps.CustomOverlay({
