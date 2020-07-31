@@ -55,26 +55,24 @@ $(document).ready(function(){
     //if($('#content').scrollTop()+$('#content').height()>=$('#content').prop('scrollHeight')-10) searchZipcodeRoad();
   });
 
-  $('.btnMap').unbind('click').click(function(e){
-    var address=$(this).val();
+  $('.btnMap').unbind('click').click(clickBtnMap=function(e){
+    var address='서울특별시 강동구 강동역';
     $('#loading').fadeIn(100).fadeTo("fast",0.8);
     $.ajax({
-        url: 'https://dapi.kakao.com/v2/local/search/address.json?query='+address,
-        headers:{'Authorization':'KakaoAK b653007ba9ca2519f1a6f3bb8b503856'},
+        url:'https://dapi.kakao.com/v2/local/search/address.json?query='+address,
+        headers:{'Authorization':'KakaoAK 88bf5219ab2618c0ab4eba7d524da046'},
         type:'GET'
     }).done(function(data){
-        $('#map').show();
-        kakaoMap=new kakao.maps.Map(document.getElementById('kakaoMap'),{center:new kakao.maps.LatLng(data.documents[0].y,data.documents[0].x),level:3,});
-        kakaoMarker=new kakao.maps.Marker({map:kakaoMap,position:kakaoMap.getCenter(),});
-        //var marker=new kakao.maps.Marker({position:kakaoMap.getCenter()}).setMap(map);
-        kakaoCustomOverlay=new kakao.maps.CustomOverlay({
-            //position:new kakao.maps.LatLng(parseFloat(data.documents[0].y)+0.0005,data.documents[0].x),
-            position:kakaoMap.getCenter(),
-            content:'<div style="background-color:#fff;border:1px #333 solid;border-radius: 5px;padding: 2px 6px;margin-top:-65px;"><span class="left"></span><span class="center">'+dataRoadAddr+'</span><span class="right"></span></div>'
-        }).setMap(kakaoMap);
-
-        $('#loading').hide();
-
+      $('#map').show();
+      kakaoMap=new kakao.maps.Map(document.getElementById('kakaoMap'),{center:new kakao.maps.LatLng(data.documents[0].y,data.documents[0].x),level:3,});
+      kakaoMarker=new kakao.maps.Marker({map:kakaoMap,position:kakaoMap.getCenter(),});
+      //var marker=new kakao.maps.Marker({position:kakaoMap.getCenter()}).setMap(map);
+      kakaoCustomOverlay=new kakao.maps.CustomOverlay({
+          //position:new kakao.maps.LatLng(parseFloat(data.documents[0].y)+0.0005,data.documents[0].x),
+          position:kakaoMap.getCenter(),
+          content:'<div style="background-color:#fff;border:1px #333 solid;border-radius: 5px;padding: 2px 6px;margin-top:-65px;"><span class="left"></span><span class="center">'+dataRoadAddr+'</span><span class="right"></span></div>'
+      }).setMap(kakaoMap);
+      $('#loading').hide();
     });
     return false;
   }); // $('.btnMap').unbind('click').click(function(e){
@@ -299,7 +297,7 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 <div id="loading"><div><img src="lib/loading.gif" alt="loading"/></div></div>
 
 <div id="map">
-	<button class="btnCloseMap" style="z-index:710;position:absolute;left:5px;top:5px;width:35px;height:35px;letter-spacing:-10px;border:0;color:transparent;background:url('icon_close_white.png') no-repeat 0px 0px / cover;background-color:#555;">닫기</button>
+	<button class="btnCloseMap" style="z-index:710;position:absolute;left:5px;top:5px;width:35px;height:35px;letter-spacing:-10px;border:0;color:transparent;background:url('career/icon_close_white.png') no-repeat 0px 0px / cover;background-color:#555;">닫기</button>
 	<div id="kakaoMap"></div>
 </div>
 <div id="info">
