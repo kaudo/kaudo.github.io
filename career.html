@@ -30,6 +30,7 @@ var urlPrefix='https://kaudo.com/'
 var kakaoMap;
 var kakaoMarker;
 var kakaoCustomOverlay;
+var address='서울시 강동구 천호대로 1097 강동역';
 
 $(window).resize(resizeWindow=function(){
   $('#header').css({height:$('.head').height()+$('.areaSkill').height()+12});
@@ -46,15 +47,18 @@ $(document).ready(function(){
     //if($('#content').scrollTop()+$('#content').height()>=$('#content').prop('scrollHeight')-10) searchZipcodeRoad();
   });
 
+  $('.btnClose').unbind('click').click(function(){
+    $(this).parent().hide();
+		return false;
+	});
+
   $('.btnMap, .head').unbind('click').click(clickBtnMap=function(e){
-    var address='서울특별시 강동구 강동역';
     $('#loading').fadeIn(100).fadeTo("fast",0.8);
     $.ajax({
         url:'https://dapi.kakao.com/v2/local/search/address.json?query='+address,
         headers:{'Authorization':'KakaoAK 88bf5219ab2618c0ab4eba7d524da046'},
         type:'GET'
     }).done(function(data){
-      alert(data);
       $('#map').show();
       kakaoMap=new kakao.maps.Map(document.getElementById('kakaoMap'),{center:new kakao.maps.LatLng(data.documents[0].y,data.documents[0].x),level:3,});
       kakaoMarker=new kakao.maps.Marker({map:kakaoMap,position:kakaoMap.getCenter(),});
@@ -62,23 +66,12 @@ $(document).ready(function(){
       kakaoCustomOverlay=new kakao.maps.CustomOverlay({
           //position:new kakao.maps.LatLng(parseFloat(data.documents[0].y)+0.0005,data.documents[0].x),
           position:kakaoMap.getCenter(),
-          content:'<div style="background-color:#fff;border:1px #333 solid;border-radius: 5px;padding: 2px 6px;margin-top:-65px;"><span class="left"></span><span class="center">'+dataRoadAddr+'</span><span class="right"></span></div>'
+          content:'<div style="background-color:#fff;border:1px #333 solid;border-radius: 5px;padding: 2px 6px;margin-top:-65px;"><span class="left"></span><span class="center">'+address+'</span><span class="right"></span></div>'
       }).setMap(kakaoMap);
       $('#loading').hide();
     });
     return false;
   }); // $('.btnMap').unbind('click').click(function(e){
-
-
-	$('.btnCloseMap').unbind('click').click(function(){
-		$('.areaMap').hide();
-		return false;
-	});
-
-  $('#dialog .btnClose').unbind('click').click(function(){
-    $('#dialog').hide();
-    return false;
-  });
 
   $('#header .btnSkill').unbind('click').click(function(){
     $('#loading').show();
@@ -148,8 +141,8 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 
 <div id="dialog" style="">
   <div class="nes-container with-title is-rounded" style=""><!-- is-centered-->
-    <a href="#" class="btnClose" style="position:absolute;margin-top: -18px;margin-left: -14px;background-color: #555;padding: 6px 15px 6px 16px;color:#f7d51d;border-top-left-radius: 16px;border-bottom-right-radius: 16px;font-size: 20px;text-decoration: none;min-width: 160px;"></a>
-    <button class="btnClose" style="position:absolute;width:40px;height:40px;border:0;background:url('career/icon_jellyfish.png') no-repeat 0px 0px / contain;padding:0px;letter-spacing:-9px;color:transparent;margin:-27px 0 0 -22px;display:none;">jellyfish</button>
+    <a href="#" class="btnCloseX" style="position:absolute;margin-top: -18px;margin-left: -14px;background-color: #555;padding: 6px 15px 6px 16px;color:#f7d51d;border-top-left-radius: 16px;border-bottom-right-radius: 16px;font-size: 20px;text-decoration: none;min-width: 160px;"></a>
+    <button class="btnCloseX" style="position:absolute;width:40px;height:40px;border:0;background:url('career/icon_jellyfish.png') no-repeat 0px 0px / contain;padding:0px;letter-spacing:-9px;color:transparent;margin:-27px 0 0 -22px;display:none;">jellyfish</button>
     <p style="padding:20px 0 15px 0;overflow:auto;font:normal normal 18px/20px auto;"></p>
   </div>
 </div>
@@ -289,7 +282,7 @@ select{font:normal bold 16px/18px -webkit-control;font-family:'나눔 고딕';}
 <div id="loading"><div><img src="lib/loading.gif" alt="loading"/></div></div>
 
 <div id="map">
-	<button class="btnCloseMap" style="z-index:710;position:absolute;left:5px;top:5px;width:35px;height:35px;letter-spacing:-10px;border:0;color:transparent;background:url('career/icon_close_white.png') no-repeat 0px 0px / cover;background-color:#555;">닫기</button>
+	<button class="btnClose" style="z-index:710;position:absolute;left:5px;top:5px;width:35px;height:35px;letter-spacing:-10px;border:0;color:transparent;background:url('career/icon_close_white.png') no-repeat 0px 0px / cover;background-color:#555;">닫기</button>
 	<div id="kakaoMap"></div>
 </div>
 <div id="info">
