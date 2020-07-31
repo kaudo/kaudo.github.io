@@ -55,7 +55,7 @@ $(document).ready(function(){
     //if($('#content').scrollTop()+$('#content').height()>=$('#content').prop('scrollHeight')-10) searchZipcodeRoad();
   });
 
-  $('.btnMap').unbind('click').click(clickBtnMap=function(e){
+  $('.btnMap, .head').unbind('click').click(clickBtnMap=function(e){
     var address='서울특별시 강동구 강동역';
     $('#loading').fadeIn(100).fadeTo("fast",0.8);
     $.ajax({
@@ -63,6 +63,7 @@ $(document).ready(function(){
         headers:{'Authorization':'KakaoAK 88bf5219ab2618c0ab4eba7d524da046'},
         type:'GET'
     }).done(function(data){
+      alert(data);
       $('#map').show();
       kakaoMap=new kakao.maps.Map(document.getElementById('kakaoMap'),{center:new kakao.maps.LatLng(data.documents[0].y,data.documents[0].x),level:3,});
       kakaoMarker=new kakao.maps.Marker({map:kakaoMap,position:kakaoMap.getCenter(),});
