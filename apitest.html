@@ -23,6 +23,7 @@ var kakaoMap;
 var kakaoMarker;
 var kakaoCustomOverlay;
 var address='서울시 강동구 천호대로 1097 강동역';
+var keyApi='';
 
 $(window).resize(resizeWindow=function(){
   $('#header').css({height:$('.head').height()+$('.areaSkill').height()+12});
@@ -95,7 +96,7 @@ $(document).ready(function(){
   //$('.btnSearch:first').click();
   $('#loading').hide();
 
-  var keyApi='GYF%2BDjKmLF7uE0CchJUGgbFS2%2BxLFwXxmD5bGzyCCdpyLhYHsjlTHQHvVBlIGjKLQc%2BsmvaI3zxR42spMFuLww%3D%3D';
+  keyApi='GYF%2BDjKmLF7uE0CchJUGgbFS2%2BxLFwXxmD5bGzyCCdpyLhYHsjlTHQHvVBlIGjKLQc%2BsmvaI3zxR42spMFuLww%3D%3D';
   /*
   $.ajax({
       url:'http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList?ServiceKey='+keyApi+'&strSrch=3',
@@ -108,9 +109,9 @@ $(document).ready(function(){
   */
 
   $.ajax({
-    url:'http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList?ServiceKey='+keyApi+'&strSrch=3',
-    type:'post',
-    dataType:'jsonp',
+    url:'http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList?strSrch=3&serviceKey='+keyApi,
+    type:'get',
+    dataType:'xml',
     data:{
     },
     error:function(xhr,status,error){
