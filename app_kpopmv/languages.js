@@ -2,37 +2,38 @@ $.lang={};
 $.lang.en={
 	lang:'en',
   title:'kpop music video',
-  broadcast:'broadcast',
+  broadcast:'broad<br/>cast',
   agency:'agency',
-  celebrity:'celebrity',
-	youtuber:'youtuber',
-	viewall:'view all',
+  celebrity:'celeb<br/>rity',
+	youtuber:'youtu<br/>ber',
+	viewall:'view<br/>all',
 };
 $.lang.ko={
 	lang:'ko',
 	title:'kpop music video',
-  broadcast:'broadcast',
+  broadcast:'broad<br/>cast',
   agency:'agency',
-  celebrity:'celebrity',
-	youtuber:'youtuber',
-	viewall:'view all',
+  celebrity:'celeb<br/>rity',
+	youtuber:'youtu<br/>ber',
+	viewall:'view<br/>all',
 };
 $.lang.ja={
 	lang:'ja',
 	title:'kpop music video',
-  broadcast:'broadcast',
+  broadcast:'broad<br/>cast',
   agency:'agency',
-  celebrity:'celebrity',
-	youtuber:'youtuber',
-	viewall:'view all',
+  celebrity:'celeb<br/>rity',
+	youtuber:'youtu<br/>ber',
+	viewall:'view<br/>all',
 };
 $.lang.zh={
+	lang:'zh',
 	title:'kpop music video',
-  broadcast:'broadcast',
+  broadcast:'broad<br/>cast',
   agency:'agency',
-  celebrity:'celebrity',
-	youtuber:'youtuber',
-	viewall:'view all',
+  celebrity:'celeb<br/>rity',
+	youtuber:'youtu<br/>ber',
+	viewall:'view<br/>all',
 };
 
 if(location.href.indexOf('lang=')<0) $.lang=$.lang.en;
