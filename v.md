@@ -1,6 +1,3 @@
-<iframe class="youtube" src="https://www.youtube.com/watch?v=K17gkN5N9ls"  
- frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+{% video1.html id="https://www.youtube.com/watch?v=K17gkN5N9ls" %}  
 
-
- <iframe class="youtube" src="https://www.youtube.com/watch?v=PQmJhsM9jXQ"  
-  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+{% video1.html id="https://www.youtube.com/watch?v=PQmJhsM9jXQ" %}  
