@@ -1,3 +1,28 @@
+<style>
+.linkbox{border: 2px #ff9900 solid;padding: 10px;}
+.linkbox a{
+line-height: 26px;
+font-weight: bold;
+text-decoration: none !important;
+color: #555555 !important;
+}
+.linkbox a.current{
+  /*filter:drop-shadow(2px 2px 3px gray);
+  background-color:#006dd7;*/
+  color:#ff9900 !important;
+}
+</style>
+<script>
+$(document).ready(function(){
+var linkboxCurrent=location.href.split('/')[location.href.split('/').length-1];
+$('.linkbox a').each(function(idx,obj){
+  var linkboxNumber=$(obj).attr('href').split('/')[$(obj).attr('href').split('/').length-1];
+  console.log(linkboxCurrent,linkboxNumber);
+  if(linkboxCurrent==linkboxNumber) $(obj).addClass('current');
+});
+});
+</script>
+<div class="linkbox">
 <a target="_blank" href="https://blog.nachal.com/1633">1. AWS EC2 인스턴스 생성</a><br/>
 <a target="_blank" href="https://blog.nachal.com/1649">2. EC2 보안그룹 인바운드 규칙 접속 설정</a><br/>
 <a target="_blank" href="https://blog.nachal.com/1634">3. Putty로 EC2접속, PPK키 생성</a><br/>
@@ -10,8 +35,11 @@
 <a target="_blank" href="https://blog.nachal.com/1640">10. EC2에 메이븐 설치</a><br/>
 <a target="_blank" href="https://blog.nachal.com/1643">11. 젠킨스에 자바 설정</a><br/>
 <a target="_blank" href="https://blog.nachal.com/1642">12. 젠킨스에 메이븐 연결</a><br/>
-<a target="_blank" href="https://blog.nachal.com/1639">13. 젠킨스에 깃허브 연동</a><br/>
+<a target="_blank" href="https://blog.nachal.com/1639">13. 젠킨스에 깃허브 연동, 빌드</a><br/>
 <a target="_blank" href="https://blog.nachal.com/1644">14. 스프링부트 서버 실행, 8080, 80포트 포워딩</a><br/>
 <a target="_blank" href="https://blog.nachal.com/1647">15. 스프링부트 재시작 스크립트</a><br/>
 <a target="_blank" href="https://blog.nachal.com/1645">16. Publish over SSH 설정</a><br/>
 <a target="_blank" href="https://blog.nachal.com/1650">17. 젠킨스 깃허브 웹훅 자동빌드 설정</a><br/>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
