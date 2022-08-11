@@ -20,14 +20,14 @@ html {
 	height: -webkit-fill-available;
 	overflow-x:hidden;
 	overflow-y:scroll;
-	font-size:11px;
+	font-size:16px;
 }
 body{
 	-ms-overflow-style:none;
 	min-height: -webkit-fill-available;
 	font-family:dotum,-apple-system, BlinkMacSystemFont,"Segoe UI",sans-serif;
 	margin:0;
-	background-color:#cccccc;
+	background-color:#fefefe;
 	color:#333333;
 }
 p{margin:0;word-break:keep-all;}
@@ -57,23 +57,40 @@ li{text-indent:-5vmin;}
 <script src="../lib/jquery-3.5.0.min.js"></script>
 <style>/*ection{opacity:0.3;}*/</style>
 <script>
+function pt(obj){return $(obj).offset().top;}
+//function pb(obj){return $(obj).offset().top+$(obj).height();}
+function pb(obj,margin){return $(obj).offset().top+$(obj).outerHeight(margin==false ? false : true);}
+function pw(obj){return $(obj).width();}
+function ph(obj){return $(obj).height();}
+function gw(percentage){return window.innerWidth*percentage/100;}
+function gh(percentage){return window.innerHeight*percentage/100;}
+function isMobile(){ if(/MRA58N\)/.test(navigator.userAgent))return false;
+	return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);}
+function isMobileRatio(){
+	if(mobDevice()) return true;
+	else if(window.innerWidth<900) return true;
+	else return false;}
+
 $(function(){
 	$('#imageViewer').click(function(){
 		$('#imageViewer').hide();
 	})
 
 	$('#contents img').click(function(){
+		console.log($(this).attr('src'));
+		$('#imageViewer img').attr('src',$(this).attr('src'));
 		$('#imageViewer').show();
 	});
 
+	console.log(isMobile());
 });
 </script>
 </head>
 <body >
 abcde
 
-<div id="imageViewer" style="position:absolute;top:0;left:0;background-color:#333333;width:100%;height:100%;display:flex;align-items:center;">
-	<img src="./ami.png" style="max-width:100%;max-height:100%;">
+<div id="imageViewer" style="display:none;position:fixed;top:0;left:0;background-color:#333333;width:100%;height:100%;align-items:start;overflow:scroll;">
+	<img src="./ami.png" style="margin:1rem;">
 </div>
 
 <div id="container">
@@ -109,10 +126,14 @@ Google Cloud Platforms 인증 <br/><br/>
 	https://mulzomby.github.io/ <br/>
 	
 	
-	AWS <br/>
+	<h3>AWS</h3><br/>
 	
-	<img src="./ami.png" style="border:1px gray solid;max-height:15vh;max-width:100vw;">
-	
+	오토스케일 생성을 위해 저장된 이미지<br/>
+	<img src="./ami.png" style="border:1px gray solid;max-height:15vh;max-width:100vw;"><br/><br/>
+
+	코드디플로이 배포 내역<br/>
+	<img src="./code_deploy_group.png" style="border:1px gray solid;max-height:15vh;max-width:100vw;"><br/><br/>
+
 	<br/> <br/>
 	
 	GCP <br/>
