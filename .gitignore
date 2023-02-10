@@ -7,7 +7,7 @@ Thumbs.db
 bin/
 gen/
 .gradle/
-build/
+xxxxxxbuild/
 local.properties
 proguard/
 .metadata/
