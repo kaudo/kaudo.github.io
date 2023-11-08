@@ -1,0 +1,33 @@
+<html>
+
+<head>
+  <link href="./index.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/MotionPathPlugin.min.js"></script>
+</head>
+
+<body>
+  <svg width="100%" height="100%" viewBox="-0 -0 1000 1000" id="svg">
+    <circle cx="100" cy="100" r="3" />
+    <circle cx="300" cy="20" r="3" />
+    <path fill="none" id="path"
+      d="m100 300 h300 v-100 h-300"
+	  stroke-width="2"
+	  stroke-linecap="round"
+	  stroke-dasharray="3" 
+	  stroke-dashoffset="3"
+	  stroke="black" fill="transparent"
+	  />
+    <g id="rect">
+      <rect width="85" height="30" fill="dodgerblue" />
+      <text x="10" y="19" font-size="14">SVG &lt;rect&gt;</text>
+    </g>
+  </svg>
+  <div id="div">#div</div>
+  
+  <link href='//fonts.googleapis.com/css?family=Signika+Negative:300,400' rel='stylesheet' type='text/css'>
+  
+  <script src="./index.js"></script>
+</body>
+
+</html>
